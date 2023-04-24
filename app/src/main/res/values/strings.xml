@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">EaterActive_Client</string>
+    <string name="app_title">EaterActive</string>
+    <string name="view_restaurants">View Restaurants</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_text">Welcome to EaterActive! To get started ordering delicious foods from all of your local restaurants, please Login or Sign Up.</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username_prompt">Username:</string>
+    <string name="password_prompt">Password:</string>
+    <string name="password_hint">P4ssw0rd0fY0urCh01C3</string>
+    <string name="username_hint">Your User Name</string>
 </resources>
