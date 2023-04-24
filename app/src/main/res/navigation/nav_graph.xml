@@ -11,14 +11,14 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainActivity_to_welcomeFragment"
+            android:id="@+id/action_mainFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_enter_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_enter_anim" />
         <action
-            android:id="@+id/action_mainActivity_to_mainMenuFragment"
+            android:id="@+id/action_mainFragment_to_restaurantsFragment"
             app:destination="@id/restaurantsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_enter_anim"
@@ -67,6 +67,5 @@
     <fragment
         android:id="@+id/restaurantMenuFragment"
         android:name="com.example.eateractive_client.restaurant_menu.RestaurantMenuFragment"
-        android:label="fragment_restaurant_menu">
-    </fragment>
+        android:label="fragment_restaurant_menu"></fragment>
 </navigation>
