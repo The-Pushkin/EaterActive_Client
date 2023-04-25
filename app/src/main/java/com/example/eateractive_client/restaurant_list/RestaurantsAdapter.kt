@@ -1,15 +1,18 @@
 package com.example.eateractive_client.restaurant_list
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eateractive_client.databinding.DividerRowBinding
 import com.example.eateractive_client.databinding.RestaurantRowBinding
+import com.example.eateractive_client.restaurant_menu.RestaurantMenuFragment
 
-class RestaurantsAdapter(private val onClickCallback: () -> Unit) :
+class RestaurantsAdapter(private val onClickCallback: (Bundle) -> Unit) :
     ListAdapter<RestaurantModel, RestaurantsAdapterViewHolder>(RestaurantModelCallback) {
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is RestaurantModel.Restaurant -> RestaurantsAdapterViewHolder.RESTAURANT_ITEM
@@ -50,13 +53,19 @@ sealed class RestaurantsAdapterViewHolder(itemView: View) : RecyclerView.ViewHol
     abstract fun bind(item: RestaurantModel)
     class RestaurantViewHolder(
         private val binding: RestaurantRowBinding,
-        private val onClickCallback: () -> Unit
+        private val onClickCallback: (Bundle) -> Unit
     ) : RestaurantsAdapterViewHolder(binding.root) {
         override fun bind(item: RestaurantModel) {
             val restaurantItem = item as? RestaurantModel.Restaurant ?: return
             with(binding) {
                 restaurantName.text = restaurantItem.name
-                restaurantName.setOnClickListener { onClickCallback() }
+                restaurantName.setOnClickListener {
+                    onClickCallback(
+                        bundleOf(
+                            RestaurantMenuFragment.KEY_ARG_RESTAURANT_NAME to restaurantItem.name
+                        )
+                    )
+                }
             }
         }
     }

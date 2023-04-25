@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.eateractive_client.R
 import com.example.eateractive_client.databinding.FragmentRestaurantsBinding
 
 class RestaurantsFragment : Fragment() {
@@ -52,7 +54,12 @@ class RestaurantsFragment : Fragment() {
             RestaurantModel.Divider,
         )
 
-        val adapter = RestaurantsAdapter {}
+        val adapter = RestaurantsAdapter { bundle ->
+            findNavController().navigate(
+                R.id.action_restaurantsFragment_to_restaurantMenuFragment,
+                bundle
+            )
+        }
         adapter.submitList(items)
         binding.restaurantList.adapter = adapter
         binding.restaurantList.layoutManager = LinearLayoutManager(context)

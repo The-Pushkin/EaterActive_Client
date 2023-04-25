@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/restaurant_name"
+        android:text="@string/sample_restaurant_name"
         android:textColor="@color/view_color"
         android:textSize="30sp"
         android:textStyle="bold"

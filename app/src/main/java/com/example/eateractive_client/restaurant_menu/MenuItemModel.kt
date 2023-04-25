@@ -1,9 +1,9 @@
 package com.example.eateractive_client.restaurant_menu
 
 sealed interface MenuItemModel {
-    class MenuItem(
-        name: String,
-        price: Float
+    data class MenuItem(
+        val name: String,
+        val price: Double
     ) : MenuItemModel
 
     object Divider : MenuItemModel

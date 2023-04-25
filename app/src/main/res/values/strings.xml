@@ -16,4 +16,5 @@
     <string name="sample_menu_item_name">Pastrama de oaie pe ceapa</string>
     <string name="sample_menu_item_price">42.56 RON</string>
     <string name="sample_restaurant_name">La Cocosu\' Rosu</string>
+    <string name="price_string">%.2f RON</string>
 </resources>
