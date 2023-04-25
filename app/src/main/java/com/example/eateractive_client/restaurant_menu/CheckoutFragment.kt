@@ -28,6 +28,11 @@ class CheckoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCheckoutBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.title.text = getString(R.string.cart)
 
@@ -38,14 +43,10 @@ class CheckoutFragment : Fragment() {
         binding.menuItemList.layoutManager = LinearLayoutManager(context)
 
         viewModel.menuItems.observe(viewLifecycleOwner) { menuItems ->
-            adapter.submitList(menuItems.map {
-                MenuItemModel.MenuItem(
-                    it.name ?: "",
-                    it.price ?: 0.0
-                )
-            })
+            val newList = menuItems.map {
+                MenuItemModel.MenuItem(it)
+            }
+            adapter.submitList(newList)
         }
-
-        return binding.root
     }
 }

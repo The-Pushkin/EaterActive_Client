@@ -20,5 +20,5 @@ abstract class CartDatabase : RoomDatabase() {
 
 fun cartDatabase(context: Context) = Room.databaseBuilder(
     context,
-    CartDatabase::class.java, "cart-cart"
+    CartDatabase::class.java, "cart_database"
 ).build()

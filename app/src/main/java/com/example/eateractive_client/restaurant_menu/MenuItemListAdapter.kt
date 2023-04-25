@@ -1,6 +1,5 @@
 package com.example.eateractive_client.restaurant_menu
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,18 +57,11 @@ sealed class MenuItemListAdapterViewHolder(itemView: View) : RecyclerView.ViewHo
         override fun bind(item: MenuItemModel) {
             val menuItem = item as? MenuItemModel.MenuItem ?: return
             with(binding) {
-                menuItemName.text = menuItem.name
+                menuItemName.text = menuItem.menuItemEntity.name
                 menuItemPrice.text =
-                    itemView.context.getString(R.string.price_string, menuItem.price)
-                menuItemName.setOnClickListener {
-                    Log.i("mama", "Da Ce Po La Me")
-                    onClickCallback(
-                        MenuItemEntity(
-                            0,
-                            menuItem.name,
-                            menuItem.price
-                        )
-                    )
+                    itemView.context.getString(R.string.price_string, menuItem.menuItemEntity.price)
+                root.setOnClickListener {
+                    onClickCallback(menuItem.menuItemEntity)
                 }
             }
         }
@@ -95,8 +87,8 @@ object MenuItemModelCallback : DiffUtil.ItemCallback<MenuItemModel>() {
         when (oldItem) {
             is MenuItemModel.MenuItem -> {
                 newItem is MenuItemModel.MenuItem &&
-                        newItem.name == oldItem.name &&
-                        newItem.price == oldItem.price
+                        newItem.menuItemEntity.name == oldItem.menuItemEntity.name &&
+                        newItem.menuItemEntity.price == oldItem.menuItemEntity.price
             }
             is MenuItemModel.Divider -> {
                 newItem is MenuItemModel.Divider
