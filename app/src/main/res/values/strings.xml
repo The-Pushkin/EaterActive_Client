@@ -13,4 +13,7 @@
     <string name="restaurants">Restaurants</string>
     <string name="username_key">username</string>
     <string name="password_key">password</string>
+    <string name="sample_menu_item_name">Pastrama de oaie pe ceapa</string>
+    <string name="sample_menu_item_price">42.56 RON</string>
+    <string name="sample_restaurant_name">La Cocosu\' Rosu</string>
 </resources>
