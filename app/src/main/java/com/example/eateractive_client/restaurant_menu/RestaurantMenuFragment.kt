@@ -5,12 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.eateractive_client.R
+import com.example.eateractive_client.cart.CartViewModel
+import com.example.eateractive_client.cart.CartViewModelFactory
+import com.example.eateractive_client.cart.cartDatabase
 import com.example.eateractive_client.databinding.FragmentRestaurantMenuBinding
 
 class RestaurantMenuFragment : Fragment() {
     private var _binding: FragmentRestaurantMenuBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: CartViewModel by viewModels {
+        CartViewModelFactory(cartDatabase(requireActivity().applicationContext))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,10 +74,16 @@ class RestaurantMenuFragment : Fragment() {
 
         binding.title.text = requireArguments().getString(KEY_ARG_RESTAURANT_NAME)
 
-        val adapter = RestaurantMenuAdapter {}
+        val adapter = MenuItemListAdapter { menuItemEntity ->
+            viewModel.addToCart(menuItemEntity)
+        }
         adapter.submitList(items)
         binding.menuItemList.adapter = adapter
         binding.menuItemList.layoutManager = LinearLayoutManager(context)
+
+        binding.checkoutButton.setOnClickListener {
+            findNavController().navigate(R.id.action_restaurantMenuFragment_to_checkoutFragment)
+        }
 
         return binding.root
     }
