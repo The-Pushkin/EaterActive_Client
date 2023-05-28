@@ -11,7 +11,7 @@ import com.example.eateractive_client.cart.entity.MenuItemEntity
     entities = [
         MenuItemEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class CartDatabase : RoomDatabase() {

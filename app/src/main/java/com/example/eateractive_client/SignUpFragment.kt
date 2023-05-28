@@ -33,6 +33,10 @@ class SignUpFragment : Fragment() {
                                 getString(R.string.password_key),
                                 passwordEditText.text.toString()
                             )
+                            putString(
+                                getString(R.string.address_key),
+                                addressEditText.text.toString()
+                            )
                             apply()
                         }
 

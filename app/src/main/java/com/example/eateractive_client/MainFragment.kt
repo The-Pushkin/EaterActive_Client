@@ -27,7 +27,8 @@ class MainFragment : Fragment() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         if (sharedPref != null) {
             if (!sharedPref.contains(getString(R.string.username_key)) ||
-                !sharedPref.contains(getString(R.string.password_key))
+                !sharedPref.contains(getString(R.string.password_key)) ||
+                !sharedPref.contains(getString(R.string.address_key))
             ) {
                 findNavController().navigate(R.id.action_mainFragment_to_welcomeFragment)
             } else {

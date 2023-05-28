@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eateractive_client.R
@@ -13,10 +15,16 @@ import com.example.eateractive_client.cart.CartViewModel
 import com.example.eateractive_client.cart.CartViewModelFactory
 import com.example.eateractive_client.cart.cartDatabase
 import com.example.eateractive_client.databinding.FragmentRestaurantMenuBinding
+import com.example.eateractive_client.server.ServerApi
+import com.example.eateractive_client.server.ServerViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RestaurantMenuFragment : Fragment() {
     private var _binding: FragmentRestaurantMenuBinding? = null
     private val binding get() = _binding!!
+    private lateinit var serverApi: ServerApi
+    private lateinit var adapter: MenuItemListAdapter
 
     private val viewModel: CartViewModel by viewModels {
         CartViewModelFactory(cartDatabase(requireActivity().applicationContext))
@@ -28,61 +36,32 @@ class RestaurantMenuFragment : Fragment() {
     ): View {
         _binding = FragmentRestaurantMenuBinding.inflate(inflater, container, false)
 
-        val items: MutableList<MenuItemModel> = mutableListOf(
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Pastrama de oaie pe ceapa", 42.5),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("McCrispy Chicken", 21.0),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Shaorma Hatz", 24.5),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Dublu Booster Nepicant", 18.3),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Cheesy Bacon Fries Burrito", 40.6),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Meniu Dublu Steakhouse", 49.8),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Doner Kebab curcan", 37.0),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Caramel Latte", 15.7),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Triple mini burger menu", 50.0),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Neumarkt Grenada Cinstita", 0.5),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Chicken-Flavoured Oil", 63.2),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Chocolate-Glazed Donut", 11.4),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Beef Wellington", 1024.2),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Piept de pui umplut cu cascaval, verdeata si usturoi", 26.7),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Frigarui de creveti gatiti in unt", 37.8),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Sarmale cu mamaliguta", 6969.6969),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Alegatura de porc la garnita cu ou", 32.14),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Choice Grade Ribeye Steak", 112.0),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Pranzul Haiducului", 43.7),
-            MenuItemModel.Divider,
-            MenuItemModel.MenuItem("Mici Cu Bere", 20.0),
-            MenuItemModel.Divider,
-        )
+        val restaurantName = requireArguments().getString(KEY_ARG_RESTAURANT_NAME)
+        val restaurantId = requireArguments().getInt(KEY_ARG_RESTAURANT_ID)
 
-        binding.title.text = requireArguments().getString(KEY_ARG_RESTAURANT_NAME)
+        binding.title.text = restaurantName
 
-        val adapter = MenuItemListAdapter { menuItemEntity ->
+        adapter = MenuItemListAdapter { menuItemEntity ->
             viewModel.addToCart(menuItemEntity)
         }
-        adapter.submitList(items)
+        adapter.submitList(emptyList())
         binding.menuItemList.adapter = adapter
         binding.menuItemList.layoutManager = LinearLayoutManager(context)
 
+        serverApi = ServerViewModel.getInstance().create(ServerApi::class.java)
+        lifecycleScope.launch(Dispatchers.IO) {
+            val items =
+                serverApi.getMenu(restaurantId).body()
+                    ?.map { MenuItemModel.MenuItem(it.id, it.name, it.price) }
+
+            adapter.submitList(items)
+        }
+
         binding.checkoutButton.setOnClickListener {
-            findNavController().navigate(R.id.action_restaurantMenuFragment_to_checkoutFragment)
+            findNavController().navigate(
+                R.id.action_restaurantMenuFragment_to_checkoutFragment,
+                bundleOf(CheckoutFragment.KEY_ARG_RESTAURANT_ID to restaurantId)
+            )
         }
 
         return binding.root
@@ -90,5 +69,6 @@ class RestaurantMenuFragment : Fragment() {
 
     companion object {
         const val KEY_ARG_RESTAURANT_NAME = "restaurantName"
+        const val KEY_ARG_RESTAURANT_ID = "restaurantId"
     }
 }

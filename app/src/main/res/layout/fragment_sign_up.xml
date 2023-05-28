@@ -50,7 +50,7 @@
         android:textAlignment="center"
         android:textColor="@color/view_color"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+        app:layout_constraintBottom_toTopOf="@id/address_prompt"
         app:layout_constraintEnd_toStartOf="@id/password_edit_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/username_prompt" />
@@ -68,10 +68,43 @@
         android:textAlignment="center"
         android:textColor="@color/background_color"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+        app:layout_constraintBottom_toTopOf="@id/address_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/password_prompt"
         app:layout_constraintTop_toBottomOf="@id/username_edit_text"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <TextView
+        android:id="@+id/address_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/address_prompt"
+        android:textAlignment="center"
+        android:textColor="@color/view_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+        app:layout_constraintEnd_toStartOf="@id/address_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_prompt" />
+
+    <EditText
+        android:id="@+id/address_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:autofillHints="name"
+        android:background="@color/view_color"
+        android:hint="@string/address_hint"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/background_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/address_prompt"
+        app:layout_constraintTop_toBottomOf="@id/password_edit_text"
         tools:ignore="VisualLintTextFieldSize" />
 
     <Button

@@ -87,6 +87,7 @@ object MenuItemModelCallback : DiffUtil.ItemCallback<MenuItemModel>() {
         when (oldItem) {
             is MenuItemModel.MenuItem -> {
                 newItem is MenuItemModel.MenuItem &&
+                        newItem.menuItemEntity.serverId == oldItem.menuItemEntity.serverId &&
                         newItem.menuItemEntity.name == oldItem.menuItemEntity.name &&
                         newItem.menuItemEntity.price == oldItem.menuItemEntity.price
             }

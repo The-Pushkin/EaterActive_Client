@@ -26,4 +26,8 @@ class CartViewModel(private val database: CartDatabase) : ViewModel() {
     fun removeFromCart(menuItemEntity: MenuItemEntity) = viewModelScope.launch {
         database.cartDao().delete(menuItemEntity)
     }
+
+    fun emptyCart() = viewModelScope.launch {
+        database.cartDao().deleteAll()
+    }
 }

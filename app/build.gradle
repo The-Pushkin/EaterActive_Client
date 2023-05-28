@@ -46,7 +46,7 @@ dependencies {
     // Basic Kotlin Android
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Navigation
@@ -58,6 +58,14 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     annotationProcessor "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Server
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // LifeCycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
     // Testing
     testImplementation 'junit:junit:4.13.2'

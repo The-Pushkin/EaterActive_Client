@@ -7,8 +7,8 @@ sealed interface MenuItemModel {
         val menuItemEntity: MenuItemEntity
     ) : MenuItemModel {
         companion object {
-            operator fun invoke(name: String, price: Double): MenuItem =
-                MenuItem(MenuItemEntity(0, name, price))
+            operator fun invoke(serverId: Int, name: String, price: Double): MenuItem =
+                MenuItem(MenuItemEntity(0, serverId, name, price))
         }
     }
 

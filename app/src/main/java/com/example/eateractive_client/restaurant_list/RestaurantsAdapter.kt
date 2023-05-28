@@ -62,7 +62,8 @@ sealed class RestaurantsAdapterViewHolder(itemView: View) : RecyclerView.ViewHol
                 restaurantName.setOnClickListener {
                     onClickCallback(
                         bundleOf(
-                            RestaurantMenuFragment.KEY_ARG_RESTAURANT_NAME to restaurantItem.name
+                            RestaurantMenuFragment.KEY_ARG_RESTAURANT_NAME to restaurantItem.name,
+                            RestaurantMenuFragment.KEY_ARG_RESTAURANT_ID to restaurantItem.id
                         )
                     )
                 }
@@ -90,6 +91,7 @@ object RestaurantModelCallback : DiffUtil.ItemCallback<RestaurantModel>() {
         when (oldItem) {
             is RestaurantModel.Restaurant -> {
                 newItem is RestaurantModel.Restaurant &&
+                        newItem.id == oldItem.id &&
                         newItem.name == oldItem.name
             }
             is RestaurantModel.Divider -> {
