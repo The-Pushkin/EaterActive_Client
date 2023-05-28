@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">EaterActive_Client</string>
     <string name="app_title">EaterActive</string>
     <string name="view_restaurants">View Restaurants</string>
@@ -18,13 +18,12 @@
     <string name="sample_menu_item_price">42.56 RON</string>
     <string name="sample_restaurant_name">La Cocosu\' Rosu</string>
     <string name="price_string">%.2f RON</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cart">Cart</string>
     <string name="checkout">Checkout</string>
     <string name="test_server">Test Server</string>
     <string name="order_status">Order Status</string>
-    <string name="awaiting_confirmation">Awaiting confirmation...</string>
+    <string name="awaiting_confirmation" tools:ignore="TypographyEllipsis">Awaiting confirmation...</string>
     <string name="place_order">Place Order</string>
     <string name="zero">0</string>
     <string name="confirm_ndelivery">Confirm\nDelivery</string>

@@ -8,9 +8,6 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ServerApi {
-    @GET("test")
-    suspend fun getTest(): Response<TestModel>
-
     @GET("restaurants")
     suspend fun getRestaurants(): Response<List<RestaurantModel>>
 
