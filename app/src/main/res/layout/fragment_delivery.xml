@@ -42,9 +42,9 @@
         android:backgroundTint="@color/view_color"
         android:text="@string/confirm_ndelivery"
         android:textAllCaps="false"
-        android:textStyle="bold"
         android:textColor="@color/background_color"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
