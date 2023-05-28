@@ -6,5 +6,6 @@ data class OrderListModel(
     val content: String,
     @SerializedName("restaurant_id")
     val restaurantId: Int,
+    @SerializedName("delivery_address")
     val deliveryAddress: String
 )
