@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         with(binding) {
             loginButton.setOnClickListener {
                 if (usernameEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
-                    lifecycleScope.launch(Dispatchers.IO) {
+                    lifecycleScope.launch(Dispatchers.Main) {
                         val loginModel = serverApi.login(
                             LoginModel(
                                 usernameEditText.text.toString(),

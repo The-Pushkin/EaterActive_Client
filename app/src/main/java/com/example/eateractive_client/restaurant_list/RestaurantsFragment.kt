@@ -1,5 +1,6 @@
 package com.example.eateractive_client.restaurant_list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,18 @@ class RestaurantsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
+
+        binding.logoutButton.setOnClickListener {
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+            if (sharedPref != null) {
+                with(sharedPref.edit()) {
+                    clear()
+                    apply()
+                }
+            }
+
+            findNavController().popBackStack(R.id.mainFragment, false)
+        }
 
         adapter = RestaurantsAdapter { bundle ->
             findNavController().navigate(
