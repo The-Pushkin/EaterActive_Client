@@ -8,6 +8,12 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ServerApi {
+    @POST("client/signup")
+    suspend fun signup(@Body signupModel: SignupModel): Response<JwtModel>
+
+    @POST("client/login")
+    suspend fun login(@Body loginModel: LoginModel): Response<JwtAddressModel>
+
     @GET("restaurants")
     suspend fun getRestaurants(): Response<List<RestaurantModel>>
 

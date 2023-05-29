@@ -23,8 +23,8 @@ class WelcomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_welcomeFragment_to_signUpFragment)
             }
 
-            logInButton.setOnClickListener {
-                findNavController().navigate(R.id.action_welcomeFragment_to_signUpFragment)
+            loginButton.setOnClickListener {
+                findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
             }
         }
 

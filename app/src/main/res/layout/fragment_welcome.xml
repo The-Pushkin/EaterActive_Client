@@ -28,14 +28,14 @@
         android:text="@string/welcome_text"
         android:textColor="@color/view_color"
         android:textSize="23sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_title"
         tools:ignore="VisualLintLongText" />
 
     <Button
-        android:id="@+id/log_in_button"
+        android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -48,7 +48,6 @@
         app:layout_constraintBottom_toTopOf="@id/sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_text"
         tools:ignore="VisualLintButtonSize" />
 
     <Button
@@ -65,7 +64,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/log_in_button"
         tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
